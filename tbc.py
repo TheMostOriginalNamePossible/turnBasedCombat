@@ -1,7 +1,7 @@
 """tbc.py
 Turn Based Combat system
 """
-
+import random
 
 class Character(object):
     def __init__(self, name="hero", hp=50, hc=20, md=10, armor=5):
@@ -74,13 +74,48 @@ class Character(object):
         print("Hit Points: " + str(self.hitPoints))
         print("Hit Chance: " + str(self.hitChance))
         print("Max Damage: " + str(self.maxDamage))
-        print("Armor: " + str(self.armor))
+        print("Armor: " + str(self.armor) + "\n")
+
+
+    def hit(self, value):
+        if type(value) == Character:
+            hitRoll = random.randint(1, 100)
+            if hitRoll <= self.hitChance:
+                damage = random.randint(1, self.maxDamage)
+                if damage <= value.armor:
+                    print(value.name + "'s armor deflected the damage.\n")
+                else:
+                    value.hitPoints = value.hitPoints - (damage - value.armor)
+                    print(value.name + " hit for " + str(damage - value.armor) + "\n")
+            else:
+                print(self.name + " missed.\n")
 
 def fight(x,y):
+    inCombat = True
+    while inCombat:
+        if x.hitPoints > 0:
+            stopper = input("type anything to continue ")
+            print("")
+            x.hit(y)
+            print(x.name + ": " + str(x.hitPoints))
+            print(y.name + ": " + str(y.hitPoints) + "\n")
+            if y.hitPoints <= 0:
+                print(x.name + " wins")
+                inCombat = False
+        if y.hitPoints > 0:
+            stopper = input("type anything to continue ")
+            print("")
+            y.hit(x)
+            print(x.name + ": " + str(x.hitPoints))
+            print(y.name + ": " + str(y.hitPoints) + "\n")
+            if x.hitPoints <= 0:
+                print(y.name + " wins")
+                inCombat = False
+
 
 def main():
     c = Character("Monster")
     c.printStats()
 
 
-main()
+
