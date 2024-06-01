@@ -1,4 +1,4 @@
-"""combat.py
+"""adamarrington_combat.py
 I just pulled from the assignment. I changed the Monster to Joshua and changed some stats
 """
 
@@ -14,7 +14,7 @@ def main():
     hero.maxDamage = 600
     hero.armor = 100
 
-    monster = tbc.Character("Joshua", 6000, 85, 300, 200)
+    monster = adamarrington_tbc.Character("Joshua", 6000, 85, 300, 200)
 
     hero.printStats()
     monster.printStats()

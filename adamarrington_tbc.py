@@ -1,4 +1,4 @@
-"""tbc.py
+"""adamarrington_tbc.py
 Turn Based Combat system
 """
 import random
